@@ -3,7 +3,7 @@
 <div class="containerPersona">
     <div class="containerPersona__sub">
         <div class="containerPersona__sub--title">
-            <h1>Médicos</h1>
+            <h1>Departamentos</h1>
             <button (click)="openCreateModal()">Crear</button>
         </div>
         <div class="containerPersona__sub--table">
@@ -11,17 +11,17 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Especialidad</th>
+                        <th>Descripción</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let medico of medicos">
-                        <td><b>{{ medico.nombre }}</b></td>
-                        <td>{{ medico.especialidad }}</td>
+                    <tr *ngFor="let departamento of departamentos">
+                        <td><b>{{ departamento.nombre }}</b></td>
+                        <td>{{ departamento.descripcion }}</td>
                         <td>
-                            <button (click)="openEditModal(medico)">Editar</button>
-                            <button (click)="deleteMedico(medico)">Eliminar</button>
+                            <button (click)="openEditModal(departamento)">Editar</button>
+                            <button (click)="deleteDepartamento(departamento)">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -29,3 +29,4 @@
         </div>
     </div>
 </div>
+

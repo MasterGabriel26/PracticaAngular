@@ -1,17 +1,13 @@
-<!-- componente del modal -->
-<!-- Titulo -->
 <h2 mat-dialog-title>{{ data.action === 'create' ? 'Crear' : 'Editar' }}</h2>
 <mat-dialog-content>
-  <!-- formulario -->
-  <form class="form" #medicoForm="ngForm">
-    <!-- contenido -->
+  <form class="form" #departamentoForm="ngForm">
     <div class="form__container">
       <label class="form__container--label" for="">Nombre</label>
       <input class="form__container--input" matInput placeholder="Nombre" [(ngModel)]="data.nombre" name="nombre" required>
     </div>
     <div class="form__container">
-      <label class="form__container--label" for="">Especialidad</label>
-      <input class="form__container--input" matInput placeholder="Especialidad" [(ngModel)]="data.especialidad" name="especialidad" required>
+      <label class="form__container--label" for="">Descripcion</label>
+      <input class="form__container--input" matInput placeholder="Descripcion" [(ngModel)]="data.descripcion" name="descripcion" required>
     </div>
   </form>
 </mat-dialog-content>
@@ -19,6 +15,6 @@
   <!-- botones -->
   <div class="container__button">
     <button class="container__button--button" mat-button [mat-dialog-close]="false">Cancelar</button>
-    <button class="container__button--button" mat-button [mat-dialog-close]="medicoForm.valid && data">Guardar</button>
+    <button class="container__button--button" mat-button [mat-dialog-close]="departamentoForm.valid && data">Guardar</button>
   </div>
 </mat-dialog-actions>

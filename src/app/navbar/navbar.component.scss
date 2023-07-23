@@ -1,0 +1,39 @@
+/* Estilos básicos del navbar */
+nav {
+    background-color: white;
+    color: #fff;
+    padding: 10px;
+    position: fixed; /* Fija el navbar en la parte superior de la pantalla */
+    top: 0; /* Asegura que el navbar esté siempre en la parte superior */
+    left: 0;
+    right: 0;
+    z-index: 100; /* Asegura que el navbar esté por encima del contenido */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin: 0 10px;
+}
+
+a {
+    color: rgb(138, 138, 138);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 10px;
+    transition: .4s;
+}
+
+a:hover {
+    color: rgb(206, 43, 98);
+    letter-spacing: 1px;
+    background-color: #fcfcfc;
+}

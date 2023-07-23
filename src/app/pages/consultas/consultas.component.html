@@ -1,0 +1,37 @@
+<!-- usamos la metodologia bem para usar scss -->
+<app-navbar></app-navbar>
+<div class="containerPersona">
+    <div class="containerPersona__sub">
+        <div class="containerPersona__sub--title">
+            <h1>Consultas</h1>
+            <button (click)="openCreateModal()">Crear</button>
+        </div>
+        <div class="containerPersona__sub--table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>Medico</th>
+                        <th>Fecha</th>
+                        <th>Diagnostico</th>
+                        <th>Tratamiento</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let consulta of consultas" >
+                        <td>{{ getNombrePaciente(consulta.paciente_id) }}</td>
+                        <td>{{ getNombreMedico(consulta.medico_id) }}</td>
+                        <td>{{ consulta.fecha }}</td>
+                        <td>{{ consulta.diagnostico }}</td>
+                        <td>{{ consulta.tratamiento }}</td>
+                        <td>
+                            <button (click)="openEditModal(consulta)">Editar</button>
+                            <button (click)="deleteConsulta(consulta)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

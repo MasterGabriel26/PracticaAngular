@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{ data.action === 'create' ? 'Crear' : 'Editar' }}</h2>
+<mat-dialog-content>
+  <!-- formulario -->
+  <form class="form" #consultaForm="ngForm">
+    <!-- contenido -->
+    <div class="form__container">
+      <label class="form__container--label" for="">Matricula Paciente</label>
+      <select class="form__container--input" matNativeControl [(ngModel)]="data.paciente_id" name="paciente_id"
+        required>
+        <option *ngFor="let paciente of pacientes" [value]="paciente.paciente_id">{{ paciente.nombre }}</option>
+      </select>
+    </div>
+    <div class="form__container">
+      <label class="form__container--label" for="">Medico</label>
+      <select class="form__container--input" matNativeControl [(ngModel)]="data.medico_id" name="medico_id" required>
+        <option *ngFor="let medico of medicos" [value]="medico.medico_id">{{ medico.nombre }}</option>
+      </select>
+    </div>
+    <div class="form__container">
+      <label class="form__container--label" for="">Fecha</label>
+      <input class="form__container--input" matInput type="date" value="yyyy-MM-dd" [(ngModel)]="data.fecha"
+        name="fecha" required>
+    </div>
+    <div class="form__container">
+      <label class="form__container--label" for="">Diagnostico</label>
+      <input class="form__container--input" matInput placeholder="Especialidad" [(ngModel)]="data.diagnostico"
+        name="diagnostico" required>
+    </div>
+    <div class="form__container">
+      <label class="form__container--label" for="">Tratamiento</label>
+      <input class="form__container--input" matInput placeholder="Especialidad" [(ngModel)]="data.tratamiento"
+        name="tratamiento" required>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <!-- botones -->
+  <div class="container__button">
+    <button class="container__button--button" mat-button [mat-dialog-close]="false">Cancelar</button>
+    <button class="container__button--button" mat-button
+      [mat-dialog-close]="consultaForm.valid && data">Guardar</button>
+  </div>
+</mat-dialog-actions>
