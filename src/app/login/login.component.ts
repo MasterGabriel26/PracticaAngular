@@ -14,6 +14,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     ]),
   ],
 })
+
+
+
+
 export class LoginComponent {
   email: string = "";
   password: string = "";
@@ -25,10 +29,11 @@ export class LoginComponent {
   loading: boolean = false;
   registerEmail: string = "";
   registerPassword: string = "";
-  registerName: string = ""; 
+  registerName: string = "";
   constructor(private authService: AuthService, private router: Router) {}
 
   login(): void {
+    
     this.loading = true;
     this.authService.login(this.email, this.password)
       .subscribe(
@@ -37,6 +42,9 @@ export class LoginComponent {
           console.log('Access Token:', response.token);
           // Guardar el token de acceso en el almacenamiento local
           localStorage.setItem('access_token', response.token);
+          const token: any = localStorage.getItem('access_token');
+          // Llamar a la función para guardar los datos en IndexedDB
+          this.guardarDatosEnIndexedDB(token);
           // Redirigir al usuario a la página principal u otra página deseada
           this.router.navigate(['/personalista']);
         },
@@ -76,4 +84,50 @@ export class LoginComponent {
     // Redirigir al usuario a la página de inicio de sesión
     this.router.navigate(['/login']);
   }
+
+
+  guardarDatosEnIndexedDB(data: any) {
+    const request = indexedDB.open('token', 1);
+
+    request.onerror = (event: Event) => {
+      console.log('Error al abrir la base de datos');
+    };
+
+    request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
+      const db = (event.target as IDBOpenDBRequest).result;
+      db.createObjectStore('db_token', { keyPath: 'id' });
+    };
+
+    request.onsuccess = (event: Event) => {
+      const db = (event.target as IDBOpenDBRequest).result;
+      const transaction = db.transaction('db_token', 'readwrite');
+      const objectStore = transaction.objectStore('db_token');
+
+      const dataToStore = { id: 1, token: data };
+      const putRequest = objectStore.put(dataToStore);
+
+      putRequest.onsuccess = (event: Event) => {
+        //console.log('Datos guardados en IndexedDB');
+        // Emitir evento de actualización para notificar a otras pestañas
+        this.emitirEventoActualizacion();
+      };
+
+      putRequest.onerror = (event: Event) => {
+        console.log('Error al guardar los datos en IndexedDB');
+      };
+
+      transaction.oncomplete = (event: Event) => {
+        db.close();
+      };
+    };
+  }
+
+  emitirEventoActualizacion() {
+    const eventData = { type: 'actualizacionDatos' };
+    const messageChannel = new MessageChannel();
+    messageChannel.port1.start();
+    messageChannel.port2.start();
+    messageChannel.port1.postMessage(eventData);
+  }
 }
+

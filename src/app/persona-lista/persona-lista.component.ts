@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { DefaultModalComponent } from '../DefaultsComponents/default-modal/default-modal.component';
 import { Router } from '@angular/router';
+import { IndexedDbService } from '../indexed-db.service';
+
 
 export interface Medico {
   medico_id?: string;
@@ -17,14 +19,23 @@ export interface Medico {
 })
 export class PersonaListaComponent implements OnInit {
   medicos: Medico[] = [];
+  token_idb : any;
 
   constructor(
     private http: HttpClient,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private indexedDbService: IndexedDbService // Agrega el servicio aquí
   ) {}
+  
   ngOnInit() {
+    this.getDataFromIndexedDB();
     this.getMedicos();
+    
+
+    setInterval(() => {
+      this.getDataFromIndexedDB();
+    }, 3000);
   }
 
   getMedicos() {
@@ -120,5 +131,22 @@ export class PersonaListaComponent implements OnInit {
       .subscribe(() => {
         this.medicos = this.medicos.filter((m) => m.medico_id !== medico.medico_id);
       });
+    
+    }
+
+  getDataFromIndexedDB(): void {
+    this.indexedDbService.getDataFromIndexedDB().then(
+      (data: any) => {
+        this.token_idb = data.token;
+        console.log('token almacenado en IndexedDB:', this.token_idb);
+        const token_ls: any = localStorage.getItem('access_token');
+        if(this.token_idb !== token_ls){
+          this.router.navigate(['/login']);
+        }
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
   }
 }
