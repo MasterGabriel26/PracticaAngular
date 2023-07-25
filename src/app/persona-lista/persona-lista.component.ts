@@ -138,7 +138,7 @@ export class PersonaListaComponent implements OnInit {
     this.indexedDbService.getDataFromIndexedDB().then(
       (data: any) => {
         this.token_idb = data.token;
-        console.log('token almacenado en IndexedDB:', this.token_idb);
+        //console.log('token almacenado en IndexedDB:', this.token_idb);
         const token_ls: any = localStorage.getItem('access_token');
         if(this.token_idb !== token_ls){
           this.router.navigate(['/login']);
