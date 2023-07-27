@@ -9,14 +9,20 @@ nav {
     right: 0;
     z-index: 100; /* Asegura que el navbar esté por encima del contenido */
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 ul {
     list-style: none;
     display: flex;
-    justify-content: center;
-    margin: 0;
+    justify-content: left;
+    margin: 0 0 0 0;
+    align-items: center;
     padding: 0;
+    cursor: pointer;
 }
 
 li {
@@ -28,12 +34,43 @@ a {
     font-weight: bold;
     text-decoration: none;
     font-size: 18px;
-    padding: 5px 10px;
     transition: .4s;
+    background-color: white;
 }
 
 a:hover {
     color: rgb(206, 43, 98);
     letter-spacing: 1px;
-    background-color: #fcfcfc;
+    background-color: white;
+}
+
+.icon {
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: white;
+    transition: .4s;
+}
+
+.icon:hover {
+    color: rgb(206, 43, 98);
+    background-color: white;
+}
+
+.a {
+    color: rgb(138, 138, 138);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    transition: .4s;
+    cursor: pointer;
+    background-color: white;
+}
+
+.a:hover {
+    color: rgb(206, 43, 98);
+    letter-spacing: 1px;
+    background-color: white;
 }

@@ -1,1 +1,36 @@
-<p>pacientes-modal works!</p>
+<h2 mat-dialog-title>{{ data.action === 'create' ? 'Crear' : 'Editar' }}</h2>
+<mat-dialog-content>
+  <form class="form" #pacientesForm="ngForm">
+    <div class="form__container">
+      <label class="form__container--label" for="">Nombre</label>
+      <input class="form__container--input" matInput placeholder="Nombre" [(ngModel)]="data.nombre" name="nombre" required>
+    </div>
+    <div class="form__container">
+      <label class="form__container--label" for="">Direccion</label>
+      <input class="form__container--input" matInput placeholder="direccion" [(ngModel)]="data.direccion" name="direccion" required>
+    </div>
+    <div class="form__container">
+      <label class="form__container--label" for="">Ciudad</label>
+      <input class="form__container--input" matInput placeholder="ciudad" [(ngModel)]="data.ciudad" name="ciudad" required>
+    </div>
+    <div class="form__container">
+      <label class="form__container--label" for="">Pais</label>
+      <input class="form__container--input" matInput placeholder="pais" [(ngModel)]="data.pais" name="pais" required>
+    </div>
+    <div class="form__container">
+      <label class="form__container--label" for="">Telefono</label>
+      <input class="form__container--input" matInput placeholder="telefono" [(ngModel)]="data.telefono" name="telefono" required>
+    </div>
+    <div class="form__container">
+      <label class="form__container--label" for="">Fecha nacimiento</label>
+      <input class="form__container--input" matInput placeholder="fecha_nacimiento" type="date" [(ngModel)]="data.fecha_nacimiento" name="fecha_nacimiento" required>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <!-- botones -->
+  <div class="container__button">
+    <button class="container__button--button" mat-button [mat-dialog-close]="false">Cancelar</button>
+    <button class="container__button--button" mat-button [mat-dialog-close]="pacientesForm.valid && data">Guardar</button>
+  </div>
+</mat-dialog-actions>

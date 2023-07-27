@@ -31,8 +31,6 @@ export class PersonaListaComponent implements OnInit {
   ngOnInit() {
     this.getDataFromIndexedDB();
     this.getMedicos();
-    
-
     setInterval(() => {
       this.getDataFromIndexedDB();
     }, 3000);

@@ -21,7 +21,8 @@ import { ConsultasModalComponent } from './DefaultsComponents/consultas-modal/co
 import { PacientesModalComponent } from './DefaultsComponents/pacientes-modal/pacientes-modal.component';
 import { ConsultasComponent } from './pages/consultas/consultas.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
-
+// Agrega los siguientes módulos de Angular Material
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import { PacientesComponent } from './pages/pacientes/pacientes.component';
     PacientesModalComponent,
     ConsultasComponent,
     PacientesComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { PacientesComponent } from './pages/pacientes/pacientes.component';
     MatFormFieldModule,
     MatDialogModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule,
   ],
   providers: [
     AuthGuard, // Agrega AuthGuard como un proveedor aquí
