@@ -1,17 +1,39 @@
-<!-- componente del modal -->
-<!-- Titulo -->
 <h2 mat-dialog-title>{{ data.action === 'create' ? 'Crear' : 'Editar' }}</h2>
 <mat-dialog-content>
   <!-- formulario -->
-  <form class="form" #medicoForm="ngForm">
+  <form class="form" #medicoForm="ngForm" [formGroup]="formularioContacto">
     <!-- contenido -->
     <div class="form__container">
       <label class="form__container--label" for="">Nombre</label>
-      <input class="form__container--input" matInput placeholder="Nombre" [(ngModel)]="data.nombre" name="nombre" required>
+      <input class="form__container--input" matInput placeholder="Nombre" formControlName="nombre" required minlength="3" maxlength="50" pattern="[a-zA-Z]+">
+      <span *ngIf="formularioContacto.get('nombre')?.errors?.['required'] && formSubmitted" style="color: red;">
+        El nombre no puede quedar vacío
+      </span>
+      <span *ngIf="formularioContacto.get('nombre')?.errors?.['minlength'] && formSubmitted" style="color: red;">
+        El nombre debe tener al menos 3 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('nombre')?.errors?.['maxlength'] && formSubmitted" style="color: red;">
+        El nombre no puede tener más de 50 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('nombre')?.errors?.['pattern'] && formSubmitted" style="color: red;">
+        El nombre solo debe contener letras
+      </span>
     </div>
     <div class="form__container">
       <label class="form__container--label" for="">Especialidad</label>
-      <input class="form__container--input" matInput placeholder="Especialidad" [(ngModel)]="data.especialidad" name="especialidad" required>
+      <input class="form__container--input" matInput placeholder="Especialidad" formControlName="especialidad" required minlength="3" maxlength="30" pattern="[a-zA-Z]+">
+      <span *ngIf="formularioContacto.get('especialidad')?.errors?.['required'] && formSubmitted" style="color: red;">
+        La especialidad no puede quedar vacía
+      </span>
+      <span *ngIf="formularioContacto.get('especialidad')?.errors?.['minlength'] && formSubmitted" style="color: red;">
+        La especialidad debe tener al menos 3 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('especialidad')?.errors?.['maxlength'] && formSubmitted" style="color: red;">
+        La especialidad no puede tener más de 30 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('especialidad')?.errors?.['pattern'] && formSubmitted" style="color: red;">
+        La especialidad solo debe contener letras
+      </span>
     </div>
   </form>
 </mat-dialog-content>
@@ -19,6 +41,6 @@
   <!-- botones -->
   <div class="container__button">
     <button class="container__button--button" mat-button [mat-dialog-close]="false">Cancelar</button>
-    <button class="container__button--button" mat-button [mat-dialog-close]="medicoForm.valid && data">Guardar</button>
+    <button class="container__button--button" mat-button (click)="onSave(); formSubmitted = true;">Guardar</button>
   </div>
 </mat-dialog-actions>

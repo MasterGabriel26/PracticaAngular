@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
 import { MatDialog } from '@angular/material/dialog';
 import { ConsultasModalComponent } from 'src/app/DefaultsComponents/consultas-modal/consultas-modal.component';
 import { Router } from '@angular/router';
@@ -11,7 +14,6 @@ export interface Consulta {
   fecha: string;
   diagnostico: string;
   tratamiento: string;
-  nombre: string;
   nombre_paciente?: string; // Nuevo campo para almacenar el nombre del paciente
   nombre_medico?: string;
 }
@@ -116,34 +118,41 @@ export class ConsultasComponent implements OnInit {
     const dialogRef = this.dialog.open(ConsultasModalComponent, {
       data: { action: 'create' },
     });
+  
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        const nuevoMedico: Consulta = {
-          consulta_id: result.consulta_id,
+        const nuevaConsulta: Consulta = {
           paciente_id: result.paciente_id,
           medico_id: result.medico_id,
           fecha: result.fecha,
           diagnostico: result.diagnostico,
           tratamiento: result.tratamiento,
-          nombre_paciente: result.nombre,
-          nombre_medico: result.nombre,
-          nombre: result.nombre
         };
-        fetch('http://localhost:8000/api/consultas', {
-          method: 'POST',
-          headers: {
+  
+        const url = 'http://localhost:8000/api/consultas';
+        const httpOptions = {
+          headers: new HttpHeaders({
             'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-          body: JSON.stringify(nuevoMedico),
-        })
-          .then((response) => response.json())
-          .then((response: Consulta) => {
+          }),
+        };
+  
+        this.http.post<Consulta>(url, nuevaConsulta, httpOptions)
+          .pipe(
+            catchError((error) => {
+              console.error(error);
+              return throwError('Something went wrong with the POST request.');
+            })
+          )
+          .subscribe((response) => {
             this.consultas.push(response);
           });
       }
     });
   }
+  
+  
+  
 
   openEditModal(consultas: Consulta) {
     console.log('Consulta ID:', consultas.consulta_id);
@@ -166,10 +175,7 @@ export class ConsultasComponent implements OnInit {
           medico_id: result.medico_id,
           fecha: result.fecha,
           diagnostico: result.diagnostico,
-          tratamiento: result.tratamiento,
-          nombre_paciente: result.nombre,
-          nombre_medico: result.nombre,
-          nombre: result.nombre
+          tratamiento: result.tratamiento
         };
         fetch(`http://localhost:8000/api/consultas/${consultas.consulta_id}`, {
           method: 'PUT',

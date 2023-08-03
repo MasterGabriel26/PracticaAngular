@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{ data.action === 'create' ? 'Crear' : 'Editar' }}</h2>
 <mat-dialog-content>
-  <form class="form" #pacientesForm="ngForm">
+  <form class="form" #pacientesForm="ngForm" >
     <div class="form__container">
       <label class="form__container--label" for="">Nombre</label>
       <input class="form__container--input" matInput placeholder="Nombre" [(ngModel)]="data.nombre" name="nombre" required>

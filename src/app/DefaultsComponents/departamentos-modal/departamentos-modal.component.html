@@ -1,13 +1,37 @@
 <h2 mat-dialog-title>{{ data.action === 'create' ? 'Crear' : 'Editar' }}</h2>
 <mat-dialog-content>
-  <form class="form" #departamentoForm="ngForm">
+  <form class="form" #departamentoForm="ngForm" [formGroup]="formularioContacto">
     <div class="form__container">
       <label class="form__container--label" for="">Nombre</label>
-      <input class="form__container--input" matInput placeholder="Nombre" [(ngModel)]="data.nombre" name="nombre" required>
+      <input class="form__container--input" matInput placeholder="Nombre" formControlName="nombre" required minlength="3" maxlength="50" pattern="[a-zA-Z]+">
+      <span *ngIf="formularioContacto.get('nombre')?.errors?.['required'] && formSubmitted" style="color: red;">
+        El nombre es requerido
+      </span>
+      <span *ngIf="formularioContacto.get('nombre')?.errors?.['minlength'] && formSubmitted" style="color: red;">
+        El nombre debe tener al menos 3 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('nombre')?.errors?.['maxlength'] && formSubmitted" style="color: red;">
+        El nombre no puede tener más de 50 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('nombre')?.errors?.['pattern'] && formSubmitted" style="color: red;">
+        El nombre solo debe contener letras
+      </span>
     </div>
     <div class="form__container">
       <label class="form__container--label" for="">Descripcion</label>
-      <input class="form__container--input" matInput placeholder="Descripcion" [(ngModel)]="data.descripcion" name="descripcion" required>
+      <input class="form__container--input" matInput placeholder="Descripcion" formControlName="descripcion" required minlength="3" maxlength="100" pattern="[a-zA-Z]+">
+      <span *ngIf="formularioContacto.get('descripcion')?.errors?.['required'] && formSubmitted" style="color: red;">
+        La descripción es requerida
+      </span>
+      <span *ngIf="formularioContacto.get('descripcion')?.errors?.['minlength'] && formSubmitted" style="color: red;">
+        La descripción debe tener al menos 3 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('descripcion')?.errors?.['maxlength'] && formSubmitted" style="color: red;">
+        La descripción no puede tener más de 100 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('descripcion')?.errors?.['pattern'] && formSubmitted" style="color: red;">
+        La descripción solo debe contener letras
+      </span>
     </div>
   </form>
 </mat-dialog-content>
@@ -15,6 +39,6 @@
   <!-- botones -->
   <div class="container__button">
     <button class="container__button--button" mat-button [mat-dialog-close]="false">Cancelar</button>
-    <button class="container__button--button" mat-button [mat-dialog-close]="departamentoForm.valid && data">Guardar</button>
+    <button class="container__button--button" mat-button (click)="onSave(); formSubmitted = true;">Guardar</button>
   </div>
 </mat-dialog-actions>

@@ -23,6 +23,7 @@ import { ConsultasComponent } from './pages/consultas/consultas.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
 // Agrega los siguientes módulos de Angular Material
 import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +51,7 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthGuard, // Agrega AuthGuard como un proveedor aquí

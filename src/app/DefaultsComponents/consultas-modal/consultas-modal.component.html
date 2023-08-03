@@ -1,35 +1,61 @@
 <h2 mat-dialog-title>{{ data.action === 'create' ? 'Crear' : 'Editar' }}</h2>
 <mat-dialog-content>
   <!-- formulario -->
-  <form class="form" #consultaForm="ngForm">
+  <form class="form" #consultaForm="ngForm" [formGroup]="formularioContacto">
     <!-- contenido -->
     <div class="form__container">
       <label class="form__container--label" for="">Matricula Paciente</label>
-      <select class="form__container--input" matNativeControl [(ngModel)]="data.paciente_id" name="paciente_id"
-        required>
+      <select class="form__container--input" matNativeControl formControlName="paciente_id" name="paciente_id" required>
         <option *ngFor="let paciente of pacientes" [value]="paciente.paciente_id">{{ paciente.nombre }}</option>
       </select>
+      <span *ngIf="formularioContacto.get('paciente_id')?.errors?.['required'] && formSubmitted" style="color: red;">
+        La matricula del paciente es requerida.
+      </span>
     </div>
     <div class="form__container">
       <label class="form__container--label" for="">Medico</label>
-      <select class="form__container--input" matNativeControl [(ngModel)]="data.medico_id" name="medico_id" required>
+      <select class="form__container--input" matNativeControl formControlName="medico_id" name="medico_id" required>
         <option *ngFor="let medico of medicos" [value]="medico.medico_id">{{ medico.nombre }}</option>
       </select>
+      <span *ngIf="formularioContacto.get('medico_id')?.errors?.['required'] && formSubmitted" style="color: red;">
+        El médico es requerido.
+      </span>
     </div>
     <div class="form__container">
       <label class="form__container--label" for="">Fecha</label>
-      <input class="form__container--input" matInput type="date" value="yyyy-MM-dd" [(ngModel)]="data.fecha"
-        name="fecha" required>
+      <input class="form__container--input" matInput type="date" formControlName="fecha" name="fecha" required>
+      <span *ngIf="formularioContacto.get('fecha')?.errors?.['required'] && formSubmitted" style="color: red;">
+        La fecha es requerida.
+      </span>
+      <span *ngIf="formularioContacto.get('fecha')?.errors?.['pattern'] && formSubmitted" style="color: red;">
+        El formato de fecha debe ser 'yyyy-MM-dd'.
+      </span>
     </div>
     <div class="form__container">
       <label class="form__container--label" for="">Diagnostico</label>
-      <input class="form__container--input" matInput placeholder="Especialidad" [(ngModel)]="data.diagnostico"
-        name="diagnostico" required>
+      <input class="form__container--input" matInput placeholder="Diagnostico" formControlName="diagnostico" required>
+      <span *ngIf="formularioContacto.get('diagnostico')?.errors?.['required'] && formSubmitted" style="color: red;">
+        El diagnóstico es requerido.
+      </span>
+      <span *ngIf="formularioContacto.get('diagnostico')?.errors?.['minlength'] && formSubmitted" style="color: red;">
+        El diagnóstico debe tener al menos 3 caracteres.
+      </span>
+      <span *ngIf="formularioContacto.get('diagnostico')?.errors?.['maxlength'] && formSubmitted" style="color: red;">
+        El diagnóstico debe tener como máximo 100 caracteres.
+      </span>
     </div>
     <div class="form__container">
       <label class="form__container--label" for="">Tratamiento</label>
-      <input class="form__container--input" matInput placeholder="Especialidad" [(ngModel)]="data.tratamiento"
-        name="tratamiento" required>
+      <input class="form__container--input" matInput placeholder="Tratamiento" formControlName="tratamiento" required>
+      <span *ngIf="formularioContacto.get('tratamiento')?.errors?.['required'] && formSubmitted" style="color: red;">
+        El tratamiento es requerido.
+      </span>
+      <span *ngIf="formularioContacto.get('tratamiento')?.errors?.['minlength'] && formSubmitted" style="color: red;">
+        El tratamiento debe tener al menos 3 caracteres.
+      </span>
+      <span *ngIf="formularioContacto.get('tratamiento')?.errors?.['maxlength'] && formSubmitted" style="color: red;">
+        El tratamiento debe tener como máximo 100 caracteres.
+      </span>
     </div>
   </form>
 </mat-dialog-content>
@@ -37,7 +63,6 @@
   <!-- botones -->
   <div class="container__button">
     <button class="container__button--button" mat-button [mat-dialog-close]="false">Cancelar</button>
-    <button class="container__button--button" mat-button
-      [mat-dialog-close]="consultaForm.valid && data">Guardar</button>
+    <button class="container__button--button" mat-button (click)="onSave(); formSubmitted = true;">Guardar</button>
   </div>
 </mat-dialog-actions>

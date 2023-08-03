@@ -1,25 +1,89 @@
 <h2 mat-dialog-title>{{ data.action === 'create' ? 'Crear' : 'Editar' }}</h2>
 <mat-dialog-content>
-  <form class="form" #hospitalForm="ngForm">
+  <form class="form" #hospitalForm="ngForm" [formGroup]="formularioContacto">
     <div class="form__container">
       <label class="form__container--label" for="">Nombre</label>
-      <input class="form__container--input" matInput placeholder="Nombre" [(ngModel)]="data.nombre" name="nombre" required>
+      <input class="form__container--input" matInput placeholder="Nombre" formControlName="nombre" [(ngModel)]="data.nombre" name="nombre"
+        required>
+      <span *ngIf="formularioContacto.get('nombre')?.errors?.['required'] && formSubmitted" style="color: red;">
+        El nombre no puede quedar vacío
+      </span>
+      <span *ngIf="formularioContacto.get('nombre')?.errors?.['minlength'] && formSubmitted" style="color: red;">
+        El nombre debe tener al menos 3 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('nombre')?.errors?.['maxlength'] && formSubmitted" style="color: red;">
+        El nombre no puede tener más de 50 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('nombre')?.errors?.['pattern'] && formSubmitted" style="color: red;">
+        El nombre solo debe contener letras
+      </span>
     </div>
     <div class="form__container">
       <label class="form__container--label" for="">Direccion</label>
-      <input class="form__container--input" matInput placeholder="Direccion" [(ngModel)]="data.direccion" name="direccion" required>
+      <input class="form__container--input" matInput placeholder="Direccion" formControlName="direccion" [(ngModel)]="data.direccion"
+        name="direccion" required>
+      <span *ngIf="formularioContacto.get('direccion')?.errors?.['required'] && formSubmitted" style="color: red;">
+        La dirección no puede quedar vacía
+      </span>
+      <span *ngIf="formularioContacto.get('direccion')?.errors?.['minlength'] && formSubmitted" style="color: red;">
+        La dirección debe tener al menos 3 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('direccion')?.errors?.['maxlength'] && formSubmitted" style="color: red;">
+        La dirección no puede tener más de 100 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('direccion')?.errors?.['pattern'] && formSubmitted" style="color: red;">
+        La dirección solo debe contener letras
+      </span>
     </div>
     <div class="form__container">
       <label class="form__container--label" for="">Ciudad</label>
-      <input class="form__container--input" matInput placeholder="Ciudad" [(ngModel)]="data.ciudad" name="ciudad" required>
+      <input class="form__container--input" matInput placeholder="Ciudad" formControlName="ciudad" [(ngModel)]="data.ciudad" name="ciudad"
+        required>
+      <span *ngIf="formularioContacto.get('ciudad')?.errors?.['required'] && formSubmitted" style="color: red;">
+        La ciudad no puede quedar vacía
+      </span>
+      <span *ngIf="formularioContacto.get('ciudad')?.errors?.['minlength'] && formSubmitted" style="color: red;">
+        La ciudad debe tener al menos 3 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('ciudad')?.errors?.['maxlength'] && formSubmitted" style="color: red;">
+        La ciudad no puede tener más de 100 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('ciudad')?.errors?.['pattern'] && formSubmitted" style="color: red;">
+        La ciudad solo debe contener letras
+      </span>
     </div>
     <div class="form__container">
       <label class="form__container--label" for="">Pais</label>
-      <input class="form__container--input" matInput placeholder="Pais" [(ngModel)]="data.pais" name="pais" required>
+      <input class="form__container--input" matInput placeholder="Pais" formControlName="pais" [(ngModel)]="data.pais" name="pais" required>
+      <span *ngIf="formularioContacto.get('pais')?.errors?.['required'] && formSubmitted" style="color: red;">
+        El país no puede quedar vacío
+      </span>
+      <span *ngIf="formularioContacto.get('pais')?.errors?.['minlength'] && formSubmitted" style="color: red;">
+        El país debe tener al menos 3 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('pais')?.errors?.['maxlength'] && formSubmitted" style="color: red;">
+        El país no puede tener más de 100 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('pais')?.errors?.['pattern'] && formSubmitted" style="color: red;">
+        El país solo debe contener letras
+      </span>
     </div>
     <div class="form__container">
       <label class="form__container--label" for="">Telefono</label>
-      <input class="form__container--input" matInput placeholder="Telefono" [(ngModel)]="data.telefono" name="telefono" required>
+      <input class="form__container--input" matInput placeholder="Telefono" formControlName="telefono" [(ngModel)]="data.telefono" name="telefono"
+        required>
+      <span *ngIf="formularioContacto.get('telefono')?.errors?.['required'] && formSubmitted" style="color: red;">
+        El teléfono no puede quedar vacío
+      </span>
+      <span *ngIf="formularioContacto.get('telefono')?.errors?.['minlength'] && formSubmitted" style="color: red;">
+        El teléfono debe tener al menos 3 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('telefono')?.errors?.['maxlength'] && formSubmitted" style="color: red;">
+        El teléfono no puede tener más de 100 caracteres
+      </span>
+      <span *ngIf="formularioContacto.get('telefono')?.errors?.['pattern'] && formSubmitted" style="color: red;">
+        El teléfono solo debe contener números
+      </span>
     </div>
   </form>
 </mat-dialog-content>
@@ -27,6 +91,6 @@
   <!-- botones -->
   <div class="container__button">
     <button class="container__button--button" mat-button [mat-dialog-close]="false">Cancelar</button>
-    <button class="container__button--button" mat-button [mat-dialog-close]="hospitalForm.valid && data">Guardar</button>
+    <button class="container__button--button" mat-button (click)="onSave();  formSubmitted = true;">Guardar</button>
   </div>
 </mat-dialog-actions>
