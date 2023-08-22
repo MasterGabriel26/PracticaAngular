@@ -1,0 +1,58 @@
+<section class="body">
+    <div class="leftMenu">
+        <app-left-menu></app-left-menu>
+    </div>
+    <div class="content">
+        <p>Humo</p>
+        <div class="contentData">
+            <div class="data-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <!-- <th>Nombre</th> -->
+                            <th>Dato</th>
+                            <th>Fecha de Creación</th>
+                            <th>Fecha de Expiracion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="feedDataFiltered.length > 0; else noRecords">
+
+                            <tr *ngFor="let feed of feedData | keyvalue">
+                                <ng-container *ngIf="isFeedData2(feed.value)">
+                                    <!-- <td><b>{{ feed.key }}</b></td> -->
+                                    <td>{{ feed.value.value }}</td>
+                                    <td>{{ feed.value.created_at | date:'dd/MM/yyyy HH:mm' }}</td>
+                                    <td>{{ feed.value.expiration | date:'dd/MM/yyyy HH:mm' }}</td>
+                                </ng-container>
+                            </tr>
+                        </ng-container>
+                        <ng-template #noRecords>
+                            <tr>
+                                <td colspan="4">No hay registros en el rango de fechas seleccionado.</td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+            <div class="filters">
+                <form>
+                    <p>Filtro por fechas</p>
+                    <div class="formDiv">
+                        <p>Fecha de creacion</p>
+                        <input type="date" name="startDate" id="startDate" [(ngModel)]="selectedStartDate"
+                            (change)="applyFilters()">
+                    </div>
+                    <div class="formDiv">
+                        <p>Fecha de Expiracion</p>
+                        <input type="date" name="endDate" id="endDate" [(ngModel)]="selectedEndDate"
+                            (change)="applyFilters()">
+                    </div>
+                    <div *ngIf="showSameDateError" class="error-message">
+                        ¡No selecciones la misma fecha en ambos campos!
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

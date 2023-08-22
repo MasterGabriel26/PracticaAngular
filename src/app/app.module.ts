@@ -24,6 +24,23 @@ import { PacientesComponent } from './pages/pacientes/pacientes.component';
 // Agrega los siguientes módulos de Angular Material
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardSensorsComponent } from './Sensor/dashboard-sensors/dashboard-sensors.component';
+import { LeftMenuComponent } from './Sensor/left-menu/left-menu.component';
+import { TemperaturaComponent } from './Sensor/temperatura/temperatura.component';
+import { HumedadComponent } from './Sensor/humedad/humedad.component';
+import { PrecisionComponent } from './Sensor/precision/precision.component';
+import { HumoComponent } from './Sensor/humo/humo.component';
+import { GasesComponent } from './Sensor/gases/gases.component';
+import { MovimientoComponent } from './Sensor/movimiento/movimiento.component';
+import { RuidoComponent } from './Sensor/ruido/ruido.component';
+import { NgChartsModule } from 'ng2-charts';
+import { DatePipe } from '@angular/common';
+import { faThermometerHalf, faTint, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { RegisterComponent } from './register/register.component';
+library.add(faThermometerHalf, faTint, faVolumeUp);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +56,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     PacientesModalComponent,
     ConsultasComponent,
     PacientesComponent,
-    
+    DashboardSensorsComponent,
+    LeftMenuComponent,
+    TemperaturaComponent,
+    HumedadComponent,
+    PrecisionComponent,
+    HumoComponent,
+    GasesComponent,
+    MovimientoComponent,
+    RuidoComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,10 +77,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    NgChartsModule,
+    FontAwesomeModule,
   ],
   providers: [
-    AuthGuard, // Agrega AuthGuard como un proveedor aquí
+    AuthGuard, 
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

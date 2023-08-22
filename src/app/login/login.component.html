@@ -1,7 +1,7 @@
 <div class="containerLogin">
-  <div class="containerLogin__content" [@fadeInOut]="showRegister ? 'visible' : 'hidden'">
+  <div class="containerLogin__content">
     <div class="containerLogin__content--title">
-      <h2>IMSS</h2>
+      <h2>SafeRoom</h2>
     </div>
     <form class="containerLogin__content--form" (ngSubmit)="login()" #loginForm="ngForm">
       <div class="content">
@@ -13,35 +13,13 @@
         <input type="password" name="password" [(ngModel)]="password" required>
       </div>
       <button type="submit">INICIAR SESION</button>
-      <button (click)="showRegister = true">REGISTRATE EN EL IMSS AQUI</button>
+      <a class="button" href="/register">REGISTRATE AQUI</a>
     </form>
   </div>
-  <div class="containerLogin__content" [@fadeInOut]="showRegister ? 'hidden' : 'visible'" *ngIf="showRegister">
-    <!-- Utiliza *ngIf para mostrar u ocultar el contenido de registro -->
-    <div class="containerLogin__content--title">
-      <h2>Register</h2>
-    </div>
-    <form class="containerLogin__content--form" (ngSubmit)="register()" #registerForm="ngForm">
-      <!-- Agrega un nuevo método de registro -->
-      <div class="content">
-        <label>Name:</label>
-        <input type="text" name="name" [(ngModel)]="registerName" required>
-      </div>
-      <div class="content">
-        <label>Email:</label>
-        <input type="email" name="email" [(ngModel)]="registerEmail" required>
-      </div>
-      <div class="content">
-        <label>Password:</label>
-        <input type="password" name="password" [(ngModel)]="registerPassword" required>
-      </div>
-      <button type="submit">REGISTRARSE</button>
-
-      <!-- Agrega un botón para regresar al inicio de sesión -->
-    </form>
-  </div>
+  
 </div>
 <div class="loading-spinner" *ngIf="loading">
   <div class="overlay"></div>
   <mat-spinner diameter="50"></mat-spinner>
 </div>
+

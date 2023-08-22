@@ -1,0 +1,63 @@
+<section class="body">
+    <div class="leftMenu">
+        <app-left-menu></app-left-menu>
+    </div>
+    <div class="content">
+        <div class="btns">
+            <button (click)="changeInterval(30000)">30s</button>
+            <button (click)="changeInterval(15000)">15s</button>
+            <button (click)="changeInterval(120000)">2min</button>
+        </div>
+
+        <div class="data-container">
+            <div class="cardsTop">
+                <div class="value-container">
+                    <p>Temperatura</p>
+                    <div class="dato">
+                        <p> {{ getLatestValue('temperatura') }}&deg;</p>
+                    </div>
+                </div>
+                <div class="value-container">
+                    <p>Humedad</p>
+                    <div class="dato">
+                        <p>{{ getLatestValue('humedad') }}</p>
+                    </div>
+                </div>
+                <div class="value-container">
+                    <p>Sonido</p>
+                    <div class="dato">
+                        <p>{{ getLatestValue('sonido') }}</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="cards2">
+                <div class="value-container">
+                    <p>Ventana</p>
+                    <div class="dato">
+                        <p [ngClass]="getDatoClassDistancia('distancia')"> {{ getLatestValue2('distancia') }}</p>
+                    </div>
+                </div>
+                <div class="value-container">
+                    <p>Entrada</p>
+                    <div class="dato">
+                        <p [ngClass]="getDatoClass('sensorvalue')"> {{ getLatestValue('sensorvalue') }}</p>
+                    </div>
+                </div>
+                <div class="value-container">
+                    <p>Gases</p>
+                    <div class="dato">
+                        <p [ngClass]="getDatoClassMq2('mq2')">{{ getLatestValue3('mq2') }}</p>
+                    </div>
+                </div>
+
+                <div class="value-container">
+                    <p>Humo</p>
+                    <div class="dato">
+                        <p [ngClass]="getDatoClassMq5('mq5')">{{ getLatestValue4('mq5') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

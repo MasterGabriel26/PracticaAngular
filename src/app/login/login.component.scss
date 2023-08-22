@@ -4,9 +4,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-image: url("../png/bg.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #0c1e35;
     align-items: center;
     .containerLogin__content {
         padding: 2rem 3rem;
@@ -39,7 +37,7 @@
                     margin-top: 2vh;
                 }
                 input {
-                    border-radius: 10px;
+                    border-radius: 7px;
                     border: none;
                     margin-top: 1vh;
                     width: 40vh;
@@ -51,26 +49,34 @@
             }
             button {
                 border: none;
-                border-radius: 10px;
+                border-radius: 7px;
                 cursor: pointer;
-                background-color: rgb(232, 232, 232);
+                background-color: #0c1e35;
                 box-shadow:
                     rgba(0, 0, 0, 0.12) 0px 1px 3px,
                     rgba(0, 0, 0, 0.24) 0px 1px 2px;
                 margin-top: 3vh;
                 padding: 1vh;
-            }
-            button:nth-of-type(2) {
-                border: none;
-                border-radius: 10px;
-                cursor: pointer;
                 color: white;
-                background-color: rgb(206, 43, 98);
-                box-shadow:
-                    rgba(0, 0, 0, 0.12) 0px 1px 3px,
-                    rgba(0, 0, 0, 0.24) 0px 1px 2px;
+                transition: .2s;
+                &:hover{
+                    letter-spacing: 1px;
+                }
+            }
+            .button {
+                border: none;
+                border-radius: 7px;
+                cursor: pointer;
+                color: rgb(69, 103, 196);
+                
+                text-align: center;
                 margin-top: 3vh;
                 padding: 1vh;
+                transition: .2s;
+                &:hover{
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                }
             }
         }
     }
@@ -97,17 +103,20 @@
                     padding: 1vh;
                 }
             }
-            button {
+            .button {
                 border: none;
-                border-radius: 10px;
+                border-radius: 7px;
                 cursor: pointer;
-                background-color: rgb(206, 43, 98);
                 color: white;
-                box-shadow:
-                    rgba(0, 0, 0, 0.12) 0px 1px 3px,
-                    rgba(0, 0, 0, 0.24) 0px 1px 2px;
+                background-color: #0c1e35;
+                text-align: center;
                 margin-top: 3vh;
                 padding: 1vh;
+                transition: .2s;
+                &:hover{
+                    letter-spacing: 1px;
+                    font-weight: lighter;
+                }
             }
         }
     }

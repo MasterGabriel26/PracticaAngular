@@ -1,0 +1,21 @@
+<section class="body">
+    <div class="body__leftMenu">
+
+        <div class="info">
+            <p>SafeRoom</p>
+        </div>
+        <a routerLink="/dashboardSensors"><mat-icon>home</mat-icon>Home</a>
+
+        <p class="subTitle">Sensores</p>
+        <a routerLink="/temperatura">Temperatura</a>
+        <a routerLink="/humedad">Humedad</a>
+        <a routerLink="/precision">Precision</a>
+        <a routerLink="/humo">Humo</a>
+        <a routerLink="/gases">Gases</a>
+        <a routerLink="/movimiento">Movimiento</a>
+        <a routerLink="/ruidos">Ruido</a>
+        <button mat-button (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>Cerrar Sesión
+        </button>
+    </div>
+</section>
